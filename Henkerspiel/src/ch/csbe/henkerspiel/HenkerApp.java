@@ -163,7 +163,7 @@ public class HenkerApp extends Application{
 		Label l = new Label("Gewonnen");
 		Button b = new Button("Neustart");
 		
-		b.setLayoutX(275);
+		b.setLayoutX(125);
 		b.setLayoutY(135);
 		b.setFont(new Font("Arial", 30));
 		b.setOnAction(new EventHandler<ActionEvent>() {
@@ -187,13 +187,14 @@ public class HenkerApp extends Application{
 		Group gr = new Group();
 		Scene scene = new Scene(gr, 600, 450);
 		Label l = new Label("Verloren");
+		Pane pa = new Pane();
 
 		l.setLayoutX(10);
 		l.setLayoutY(10);
 		l.setFont(new Font("Arial", 30));
 		Button b = new Button("Neustart");
 		
-		b.setLayoutX(275);
+		b.setLayoutX(125);
 		b.setLayoutY(135);
 		b.setFont(new Font("Arial", 30));
 		b.setOnAction(new EventHandler<ActionEvent>() {
@@ -206,10 +207,47 @@ public class HenkerApp extends Application{
 		l.setLayoutY(10);
 		l.setFont(new Font("Arial", 30));
 		
-		gr.getChildren().addAll(l,b);
+		gr.getChildren().addAll(l,b, pa,li1, li2, li3, li4, c, li6, li7, li8, li9, li10);
 		
 		stage.setScene(scene);
 		stage.setTitle("Verloren");
 		stage.show();
+		
+		li1.setLayoutX(380);
+		li1.setLayoutY(200);
+		
+		li2.setLayoutX(420);
+		li2.setLayoutY(150);
+		
+		li3.setLayoutX(420);
+		li3.setLayoutY(70);
+		
+		li4.setLayoutX(490);
+		li4.setLayoutY(150);
+		
+		c.setLayoutX(390);
+		c.setLayoutY(110);
+		
+		li6.setLayoutX(490);
+		li6.setLayoutY(200);
+		
+		li7.setLayoutX(490);
+		li7.setLayoutY(130);
+		
+		li8.setLayoutX(490);
+		li8.setLayoutY(130);
+		
+		li9.setLayoutX(490);
+		li9.setLayoutY(350);
+		
+		li10.setLayoutX(490);
+		li10.setLayoutY(350);
+		
+		pa.setPadding(new Insets(0, 200, 350, 0));
+		pa.setStyle("-fx-background-color: white;" 
+					+ "-fx-border-style: solid;" 
+					+ "-fx-border-color: gray;");
+		pa.setLayoutX(350);
+		pa.setLayoutY(50);
 	}
 }
