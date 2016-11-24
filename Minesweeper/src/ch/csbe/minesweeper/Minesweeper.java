@@ -1,23 +1,27 @@
 package ch.csbe.minesweeper;
 
-import java.util.Random;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
+/**
+ * 
+ * @author endrit.lena
+ *
+ */
+
 public class Minesweeper {
 	
-	private Random random = new Random();
-	
+	//setBomb setzt ca. 20 Bombem an einem zufälligen platz in der GridPane
 	public static void setBomb(GridPane gp){
 		for(int i = 0;i<10;i++){
 			for(int j = 0;j<10;j++){
-				Button btn = (Button) getNode(gp,i,j);
 				if(Math.random() < 0.2){
 					Label l = (Label) getNode(MinesApp.gplabel,i,j);
 					l.setText("X");
@@ -26,6 +30,7 @@ public class Minesweeper {
 		}
 	}
 	
+	//setField setzt felder in der GridPane
 	public static GridPane setField(){
 		GridPane gp = new GridPane();
 		gp = new GridPane();
@@ -52,7 +57,8 @@ public class Minesweeper {
 		return gp;
 	}
 	
-	public static GridPane setFieldlabel(){
+	//setFieldLabel setzt Labels in der GridPane
+	public static GridPane setFieldLabel(){
 		GridPane gp = new GridPane();
 		gp = new GridPane();
 		
@@ -80,15 +86,20 @@ public class Minesweeper {
 	    }
 	    return null;
 	}
+	
+	//click führt das aus was geschieht wenn man auf einem Knopf klickt
 	public static void click(ActionEvent e){
 		Button button = (Button) e.getSource();
 		int a = GridPane.getColumnIndex(button),b = GridPane.getRowIndex(button);
 		Label l = (Label) getNode(MinesApp.gplabel,a,b);
-//		l.setVisible(false);
     	
     	if(l.getText() == "X"){
-    		//TODO set Alert window
-    		System.out.println("Verloren!!!");
+    		Alert alert = new Alert(AlertType.INFORMATION);
+    		alert.setTitle("Game Over");
+    		alert.setHeaderText("Game Over");
+
+    		alert.showAndWait();
+    		MinesApp.spiel();
     	}else{
     		button.setVisible(false);
     	}
