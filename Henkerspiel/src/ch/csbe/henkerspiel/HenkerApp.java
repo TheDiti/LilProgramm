@@ -15,8 +15,15 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author endrit.lena
+ *
+ */
+
 public class HenkerApp extends Application{
 
+	//Line & Circle dienen zur zeichnung des Mänchen
 	static Line li1 = new Line(100, 100, 0, 100);	
 	static Line li2 = new Line(0, 150, 0, 20);	
 	static Line li3 = new Line(70, 100, 0, 100);	
@@ -29,32 +36,39 @@ public class HenkerApp extends Application{
 	static Line li10 = new Line(-20, -80, 0, -100);
 	public static Stage stage;
 	
+	//main startet die Anwendung
 	public static void main(String[] args) {
 		launch(args);
 	}
 	
+	//Hier steht was geschehen soll wenn die Anwendung gestartet wird
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		stage = primaryStage;
-		strt();
+		strt();	//führt zur strt Methode
 	}
+	
+	//strt ist das GUI, welches man sieht wenn die Anwendung startet
 	public static void strt(){
-		Henkerspiel.word = Henkerspiel.randomLetter();
-		Henkerspiel.setErraten(Henkerspiel.word);
-		Group gr = new Group();
-		Scene scene = new Scene(gr, 600, 450);
-		Pane pane = new Pane();
-		Pane pa = new Pane();
-		Label l = new Label("Henkerspiel");
-		Button b = new Button("Enter");
+		Henkerspiel.setFalsch(0);	//setzt den Integer falsch auf 0
+		Henkerspiel.setAnzrichtig(0);	//setzt den Integer anzrichtig auf 0
+		Henkerspiel.word = Henkerspiel.randomLetter();	//Speichert das zufall gewählte Wort vom randomLetter im String word
+		Henkerspiel.setErraten(Henkerspiel.word);	//setzt das ausgewählte wort vom String word zum Character erraten 
+		Group gr = new Group();	//erstellt eine neue Gruppe
+		Scene scene = new Scene(gr, 600, 450);	//erstellt eine neue Scene
+		Pane pane = new Pane();	//erstellt eine neue Pane
+		Pane pa = new Pane();	//erstellt eine andere neue Pane
+		Label l = new Label("Henkerspiel");	//erstellt einen Label welches "Henkerspiel" heisst und wird als Titel im spiel benutzt
+		Button b = new Button("Enter");	//erstellt einen neuen Button mit dem name "Enter"
+		//erstellt ein neues Label welches das Gesuchte Wort ausgibt
 		Label wort = new Label("Gesuchtes Wort: " + Henkerspiel.getErraten() + "  ["  + Henkerspiel.word.length() + " Buchstaben]");
-			System.out.println(Henkerspiel.word);
-		Label lb = new Label("Wort eingeben:");
-		TextField txt = new TextField();	
+			System.out.println(Henkerspiel.word);	//gibt das gesuchte Wort in der Konsole aus
+		Label lb = new Label("Buchstabe eingeben:");	//ein neues Label welches über den TextField mit der beschriftung "Buchstabe eingeben:" steht
+		TextField txt = new TextField();	//erstellt ein neues TextFiel in welchem man Buchstaben eingeben kann
 		
-		li1.setLayoutX(380);
-		li1.setLayoutY(200);
-		li1.setVisible(false);
+		li1.setLayoutX(380); //setzt die X-Position auf die angegebene zahl
+		li1.setLayoutY(200);	//setzt die Y-Position auf die angegeben zahl
+		li1.setVisible(false);	//macht den Label unsichtbar
 		
 		li2.setLayoutX(420);
 		li2.setLayoutY(150);
@@ -94,8 +108,8 @@ public class HenkerApp extends Application{
 		
 		b.setLayoutX(275);
 		b.setLayoutY(135);
-		b.setFont(new Font("Arial", 15));
-		b.setOnAction(new EventHandler<ActionEvent>() {
+		b.setFont(new Font("Arial", 15));	//setzt die Schriftart auf Arial und die Schriftgrösse auf 15
+		b.setOnAction(new EventHandler<ActionEvent>() {	//dies macht, das der Button etwas macht wenn man drauf klickt
 		    @Override public void handle(ActionEvent e) {
 				try {
 					Henkerspiel.raten(txt.getText());
@@ -123,8 +137,8 @@ public class HenkerApp extends Application{
 		l.setLayoutY(10);
 		l.setFont(new Font("Arial", 30));
 		
-		pa.setPadding(new Insets(0, 200, 350, 0));
-		pa.setStyle("-fx-background-color: white;" 
+		pa.setPadding(new Insets(0, 200, 350, 0)); //setzt die Grösse des Pane
+		pa.setStyle("-fx-background-color: white;" 	//setzt Hintergrundfarbe, Rahmen und Rahmenfarbe der Pane
 					+ "-fx-border-style: solid;" 
 					+ "-fx-border-color: gray;");
 		pa.setLayoutX(350);
@@ -133,17 +147,19 @@ public class HenkerApp extends Application{
 		pane.setPadding(new Insets(0, 600, 450, 0)); 
 		pane.setStyle("-fx-background-color: #e6e6e6;");
 		
+		//macht das die erstellten Sachen auf der scene ausgegeben werden (sozusage macht sie sichtbar)
 		gr.getChildren().addAll(pane, pa, l, wort, txt, lb, b, li1, li2, li3, li4, c, li6, li7, li8, li9, li10);
 		
-		stage.setScene(scene);
-		stage.setTitle("Henkerspiel");
-		stage.show();
+		stage.setScene(scene);	//setzt die scene 
+		stage.setTitle("Henkerspiel");	//gibt der scene einen Titel
+		stage.show();	//zeigt die scene
 		
 	}
 
+	//maenchen ist die methode die den Höngenen mänchen zeichnet
 	public static void maenchen(){
 		switch(Henkerspiel.getFalsch()){
-		case 1: li1.setVisible(true);break;
+		case 1: li1.setVisible(true);break;	//macht die Linien & Circle sichtbar
 		case 2: li2.setVisible(true);break;
 		case 3: li3.setVisible(true);break;
 		case 4: li4.setVisible(true);break;
@@ -157,6 +173,7 @@ public class HenkerApp extends Application{
 
 	}
 	
+	//gewonnen öffnet sich wenn man das gesuchte Wort gefunden hat
 	public static void gewonnen(Stage stage){
 		Group gr = new Group();
 		Scene scene = new Scene(gr, 600, 450);
@@ -183,6 +200,7 @@ public class HenkerApp extends Application{
 		stage.show();
 	}
 	
+	//verloren öffnet sich wenn man das gesuchte wort nicht gefunden hat und das Strichmänchen gezeichnet wurde
 	public static void verloren(Stage stage){
 		Group gr = new Group();
 		Scene scene = new Scene(gr, 600, 450);
