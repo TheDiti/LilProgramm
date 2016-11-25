@@ -12,6 +12,12 @@ public class HenkerTest {
 	@Test
 	public void testRaten(){
 		Henkerspiel hs = new Henkerspiel();
+<<<<<<< HEAD
 		//TODO JUnit Test
 	}
+=======
+		//TODO test
+	}
+
+>>>>>>> origin/master
 }
